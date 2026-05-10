@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doces Mamel · Buffet de Doces & Sobremesas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --v1:#1A0A2E;--v2:#2D1550;--v3:#4A2080;--v4:#7B3FA8;--v5:#A855C8;--v6:#C78AE0;--v7:#E8C8F5;
+  --rosa:#D472B8;--rosa2:#F0A0D8;--ouro:#D4A853;--ouro2:#F0C87A;
+  --creme:#FAF0FF;--branco:#FFFFFF;
+  --glow:rgba(168,85,200,0.4);--glow2:rgba(212,168,83,0.35);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--v1);color:var(--creme);overflow-x:hidden;cursor:none}
+
+#cur{position:fixed;width:14px;height:14px;background:var(--v5);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:transform .15s}
+#curR{position:fixed;width:38px;height:38px;border:1.5px solid rgba(168,85,200,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .22s ease}
+
+/* WA */
+.waf{position:fixed;bottom:28px;right:28px;z-index:9500;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.wab{width:62px;height:62px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 30px rgba(37,211,102,.5);animation:waPulse 2.5s infinite}
+.wab svg{width:30px;height:30px;fill:#fff}
+.wal{background:rgba(10,0,20,.8);backdrop-filter:blur(8px);border:1px solid rgba(168,85,200,.3);color:#fff;font-size:.75rem;padding:.4rem .9rem;border-radius:50px;white-space:nowrap;display:none}
+.waf:hover .wal{display:block}
+@keyframes waPulse{0%,100%{box-shadow:0 4px 30px rgba(37,211,102,.5)}50%{box-shadow:0 4px 50px rgba(37,211,102,.8),0 0 0 12px rgba(37,211,102,.1)}}
+
+/* IG */
+.igf{position:fixed;bottom:28px;left:28px;z-index:9500}
+.igb{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);text-decoration:none;box-shadow:0 4px 30px rgba(214,36,159,.4);animation:igPulse 3s infinite}
+.igb svg{width:28px;height:28px;fill:#fff}
+@keyframes igPulse{0%,100%{box-shadow:0 4px 30px rgba(214,36,159,.4)}50%{box-shadow:0 4px 50px rgba(214,36,159,.7),0 0 0 12px rgba(214,36,159,.1)}}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:8000;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;transition:all .4s}
+nav.sc{background:rgba(26,10,46,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(168,85,200,.2)}
+.nLogo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--v6);letter-spacing:.04em}
+.nLogo em{color:var(--rosa2);font-style:italic}
+.nLinks{display:flex;gap:2rem;list-style:none}
+.nLinks a{color:rgba(255,255,255,.7);font-size:.86rem;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;position:relative}
+.nLinks a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--v5);transition:width .3s}
+.nLinks a:hover{color:var(--v6)}.nLinks a:hover::after{width:100%}
+.nCta{background:linear-gradient(135deg,var(--v4),var(--v5))!important;color:#fff!important;padding:.5rem 1.4rem;border-radius:50px;font-weight:500!important}
+.nCta::after{display:none!important}.nCta:hover{opacity:.9;transform:translateY(-2px)}
+
+/* ====== SPLASH ====== */
+#splash{position:fixed;inset:0;z-index:99000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#2D1550 0%,#1A0A2E 100%);overflow:hidden}
+.sStars{position:absolute;inset:0;pointer-events:none}
+.sStar{position:absolute;border-radius:50%;background:#fff;animation:twinkle linear infinite}
+@keyframes twinkle{0%,100%{opacity:0}50%{opacity:1}}
+.dollWrap{position:relative;display:flex;flex-direction:column;align-items:center;z-index:2}
+.dollBalao{background:linear-gradient(135deg,rgba(74,32,128,.92),rgba(45,21,80,.96));border:1.5px solid rgba(168,85,200,.5);border-radius:20px 20px 20px 4px;padding:1.5rem 2rem;max-width:360px;text-align:center;box-shadow:0 8px 40px rgba(168,85,200,.3);margin-bottom:10px;animation:bFloat 3s ease-in-out infinite}
+@keyframes bFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.bTitle{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--v7);font-weight:600;margin-bottom:.5rem;line-height:1.3}
+.bTitle em{color:var(--rosa2);font-style:italic}
+.bSub{color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.65}
+.bTip{color:var(--ouro2);font-size:.8rem;margin-top:.8rem;font-style:italic;animation:tipPulse 2s infinite}
+@keyframes tipPulse{0%,100%{opacity:.7}50%{opacity:1}}
+#dollC{width:160px;height:220px;filter:drop-shadow(0 0 30px rgba(168,85,200,.6));margin-bottom:4px}
+.splashBtn{background:linear-gradient(135deg,var(--v4),var(--rosa));color:#fff;border:none;border-radius:50px;padding:1rem 3rem;font-size:1rem;font-weight:600;font-family:'Jost',sans-serif;cursor:pointer;letter-spacing:.05em;box-shadow:0 8px 30px rgba(168,85,200,.5);animation:bGlow 2s ease-in-out infinite;transition:transform .2s}
+.splashBtn:hover{transform:translateY(-3px) scale(1.03)}
+@keyframes bGlow{0%,100%{box-shadow:0 8px 30px rgba(168,85,200,.5)}50%{box-shadow:0 8px 50px rgba(168,85,200,.9),0 0 0 8px rgba(168,85,200,.15)}}
+.splashOut{animation:spOut .6s ease forwards}
+@keyframes spOut{to{opacity:0;transform:scale(1.04);pointer-events:none}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px}
+.heroBg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 60% 30%,rgba(122,63,168,.22) 0%,transparent 60%),radial-gradient(ellipse 50% 70% at 20% 80%,rgba(212,114,184,.15) 0%,transparent 60%),linear-gradient(160deg,#1A0A2E 0%,#2D1550 50%,#1A0A2E 100%)}
+.hc{max-width:1200px;width:90%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;position:relative;z-index:2;padding:3rem 0}
+.hEye{display:inline-flex;align-items:center;gap:.5rem;background:rgba(168,85,200,.12);border:1px solid rgba(168,85,200,.3);color:var(--v6);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:.4rem 1rem;border-radius:50px;margin-bottom:1.8rem;animation:fadeUp .8s both}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:4.8rem;line-height:1.02;margin-bottom:1.5rem;animation:fadeUp .8s .1s both}
+.h1l1{display:block;color:var(--creme);font-weight:300}
+.h1l2{display:block;color:var(--v6);font-style:italic;font-weight:600;text-shadow:0 0 40px var(--glow)}
+.h1l3{display:block;color:var(--rosa2);font-weight:300;font-size:3.8rem}
+.hDesc{color:rgba(255,255,255,.6);font-size:1rem;line-height:1.8;max-width:400px;margin-bottom:2.5rem;animation:fadeUp .8s .2s both}
+.hBtns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .3s both}
+.btnV{background:linear-gradient(135deg,var(--v3),var(--v5));color:#fff;padding:.9rem 2.2rem;border-radius:50px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 8px 30px var(--glow);transition:all .25s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem}
+.btnV:hover{transform:translateY(-3px);box-shadow:0 12px 40px var(--glow)}
+.btnO{background:transparent;color:var(--creme);padding:.9rem 2.2rem;border-radius:50px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(168,85,200,.4);transition:all .25s}
+.btnO:hover{border-color:var(--v5);color:var(--v6)}
+.hStats{display:flex;gap:2rem;margin-top:3rem;animation:fadeUp .8s .45s both}
+.hSN{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--v6);display:block;line-height:1}
+.hSL{font-size:.72rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase}
+.hSep{width:1px;background:rgba(168,85,200,.25);align-self:stretch}
+.h3d{display:flex;justify-content:center;align-items:center;position:relative;animation:fadeUp .8s .15s both}
+.h3dGlow{position:absolute;inset:-15%;background:radial-gradient(circle,rgba(168,85,200,.18) 0%,transparent 70%);border-radius:50%;animation:glowP 3s infinite}
+@keyframes glowP{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.12);opacity:1}}
+#cakeC{max-width:420px;width:100%;height:420px;filter:drop-shadow(0 0 50px rgba(168,85,200,.45))}
+.scrollInd{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.35);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
+.scrollLine{width:1px;height:40px;background:linear-gradient(to bottom,var(--v5),transparent);animation:sLine 2s infinite}
+@keyframes sLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* MASCOTE */
+.mascote{position:fixed;bottom:100px;right:32px;z-index:7000;display:flex;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none}
+.mBal{background:linear-gradient(135deg,rgba(74,32,128,.95),rgba(45,21,80,.98));border:1px solid rgba(168,85,200,.4);color:var(--creme);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;padding:.7rem 1rem;border-radius:16px 16px 4px 16px;max-width:180px;line-height:1.4;box-shadow:0 8px 30px rgba(0,0,0,.4);opacity:0;transform:translateY(8px);transition:all .4s;margin-bottom:4px}
+.mBal.show{opacity:1;transform:translateY(0)}
+#mSvg{width:60px;height:60px;filter:drop-shadow(0 4px 12px rgba(168,85,200,.6));animation:mWig 4s ease-in-out infinite}
+@keyframes mWig{0%,100%{transform:rotate(-4deg) translateY(0)}25%{transform:rotate(4deg) translateY(-5px)}75%{transform:rotate(-2deg) translateY(-2px)}}
+
+/* SECTIONS */
+.sec{padding:7rem 0;position:relative}
+.con{max-width:1200px;margin:0 auto;padding:0 3rem}
+.sHdr{text-align:center;margin-bottom:5rem}
+.sEye{display:inline-block;color:var(--v5);font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
+.sTitle{font-family:'Cormorant Garamond',serif;font-size:3rem;line-height:1.15;color:var(--creme);margin-bottom:1rem}
+.sTitle em{color:var(--v6);font-style:italic}
+.sDiv{width:60px;height:2px;margin:1.2rem auto;background:linear-gradient(90deg,transparent,var(--v5),transparent)}
+.sSub{color:rgba(255,255,255,.5);font-size:.97rem;line-height:1.7;max-width:480px;margin:0 auto}
+
+/* SOBRE */
+.sobre{background:linear-gradient(180deg,var(--v1) 0%,#200D3A 100%)}
+.sGrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.sCards{position:relative;height:420px}
+.sCard{position:absolute;background:rgba(168,85,200,.06);border:1px solid rgba(168,85,200,.2);border-radius:20px;padding:2rem;backdrop-filter:blur(10px)}
+.sCard:nth-child(1){top:0;left:0;width:68%;height:255px}
+.sCard:nth-child(2){bottom:0;right:0;width:58%;background:rgba(168,85,200,.1);border-color:rgba(168,85,200,.35)}
+.sCard .bE{font-size:3.5rem;display:block;margin-bottom:.8rem}
+.sCard h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--v6);margin-bottom:.4rem}
+.sCard p{color:rgba(255,255,255,.55);font-size:.88rem;line-height:1.6}
+.sTxt h2{font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:var(--creme);margin-bottom:1.3rem;line-height:1.2}
+.sTxt h2 em{color:var(--v6);font-style:italic}
+.sTxt p{color:rgba(255,255,255,.55);line-height:1.8;font-size:.95rem;margin-bottom:1.1rem}
+.sInfos{display:flex;flex-direction:column;gap:.9rem;margin-top:1.8rem}
+.sInfo{display:flex;align-items:center;gap:1rem;padding:.75rem 1.1rem;background:rgba(168,85,200,.06);border-radius:12px;border:1px solid rgba(168,85,200,.15)}
+.sInfo .ico{font-size:1.2rem;flex-shrink:0}
+.sInfo strong{color:var(--v6);font-size:.83rem;display:block;font-weight:500}
+.sInfo span{color:rgba(255,255,255,.45);font-size:.78rem}
+
+/* PRODUTOS */
+.prod{background:#200D3A}
+.pGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.pCard{background:rgba(168,85,200,.05);border:1px solid rgba(168,85,200,.12);border-radius:20px;padding:1.8rem;transition:all .35s;position:relative;overflow:hidden;cursor:pointer}
+.pCard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,200,.1),transparent);opacity:0;transition:.35s}
+.pCard:hover{transform:translateY(-6px);border-color:rgba(168,85,200,.4);box-shadow:0 20px 60px rgba(168,85,200,.2)}
+.pCard:hover::before{opacity:1}
+.pEW{width:60px;height:60px;border-radius:14px;background:rgba(168,85,200,.12);border:1px solid rgba(168,85,200,.2);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin-bottom:1.3rem;transition:.3s}
+.pCard:hover .pEW{transform:scale(1.1) rotate(5deg)}
+.pCard h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--creme);margin-bottom:.5rem}
+.pCard p{color:rgba(255,255,255,.45);font-size:.83rem;line-height:1.6;margin-bottom:1.1rem}
+.pTags{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.tag{font-size:.67rem;font-weight:500;padding:.2rem .65rem;border-radius:50px;background:rgba(168,85,200,.15);color:var(--v6);border:1px solid rgba(168,85,200,.2)}
+.pFoot{display:flex;justify-content:space-between;align-items:center}
+.pPre{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--v6)}
+.pBtn{background:linear-gradient(135deg,var(--v3),var(--v5));color:#fff;border:none;border-radius:50px;padding:.4rem 1.1rem;font-size:.77rem;font-weight:600;cursor:pointer;transition:.2s}
+.pBtn:hover{transform:scale(1.05);box-shadow:0 4px 20px var(--glow)}
+
+/* COMO */
+.como{background:linear-gradient(180deg,#200D3A 0%,var(--v1) 100%)}
+.cSteps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem}
+.step{text-align:center;padding:2.2rem 1.2rem;position:relative}
+.stepConn{position:absolute;top:34px;right:-30%;width:60%;height:1px;background:linear-gradient(90deg,rgba(168,85,200,.4),transparent)}
+.step:last-child .stepConn{display:none}
+.stepN{width:52px;height:52px;border-radius:50%;border:2px solid var(--v5);display:flex;align-items:center;justify-content:center;margin:0 auto 1.3rem;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--v5);background:rgba(168,85,200,.1);position:relative;z-index:1;transition:.3s}
+.step:hover .stepN{background:var(--v5);color:#fff;transform:scale(1.1)}
+.stepE{font-size:1.7rem;display:block;margin-bottom:.7rem}
+.step h4{color:var(--creme);font-size:.95rem;font-weight:500;margin-bottom:.4rem}
+.step p{color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.5}
+
+/* FORM */
+.formSec{background:var(--v1)}
+.fWrap{max-width:800px;margin:0 auto;background:rgba(168,85,200,.05);border:1px solid rgba(168,85,200,.2);border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.fHd{background:linear-gradient(135deg,rgba(168,85,200,.15),rgba(212,114,184,.08));padding:2.5rem;text-align:center;border-bottom:1px solid rgba(168,85,200,.15)}
+.fHd h3{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--v6);margin-bottom:.4rem}
+.fHd p{color:rgba(255,255,255,.45);font-size:.88rem}
+.fBd{padding:2.5rem}
+.fGrid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
+.fG{display:flex;flex-direction:column;gap:.45rem}
+.fG.full{grid-column:1/-1}
+.fG label{color:rgba(255,255,255,.55);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.fG input,.fG select,.fG textarea{background:rgba(168,85,200,.08);border:1px solid rgba(168,85,200,.2);border-radius:12px;padding:.85rem 1.1rem;color:var(--creme);font-family:'Jost',sans-serif;font-size:.93rem;outline:none;transition:.2s;-webkit-appearance:none}
+.fG input:focus,.fG select:focus,.fG textarea:focus{border-color:var(--v5);background:rgba(168,85,200,.12)}
+.fG select option{background:#2D1550;color:var(--creme)}
+.fG textarea{resize:vertical;min-height:110px}
+.fG input::placeholder,.fG textarea::placeholder{color:rgba(255,255,255,.2)}
+.fFt{display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(168,85,200,.1);flex-wrap:wrap;gap:1rem}
+.fFt p{color:rgba(255,255,255,.35);font-size:.8rem;max-width:260px}
+.fBtns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btnWa{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:#fff;padding:.85rem 1.7rem;border-radius:50px;font-weight:600;font-size:.88rem;text-decoration:none;transition:.2s;border:none;cursor:pointer}
+.btnWa:hover{background:#1ebe59;transform:translateY(-2px)}
+.btnSub{background:linear-gradient(135deg,var(--v3),var(--v5));color:#fff;padding:.85rem 1.9rem;border-radius:50px;font-weight:600;font-size:.88rem;border:none;cursor:pointer;transition:.2s}
+.btnSub:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--glow)}
+.fSuc{display:none;text-align:center;padding:3rem}
+.fSuc .bigC{font-size:3rem;margin-bottom:1rem}
+.fSuc h4{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--v6);margin-bottom:.5rem}
+.fSuc p{color:rgba(255,255,255,.55)}
+
+/* DEPO */
+.depo{background:linear-gradient(180deg,var(--v1) 0%,#200D3A 100%)}
+.dGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.dCard{background:rgba(168,85,200,.05);border:1px solid rgba(168,85,200,.15);border-radius:20px;padding:2.2rem;position:relative;overflow:hidden;transition:.3s}
+.dCard:hover{border-color:rgba(168,85,200,.35);transform:translateY(-4px)}
+.dCard::before{content:'"';position:absolute;top:-10px;right:18px;font-family:'Cormorant Garamond',serif;font-size:8rem;color:rgba(168,85,200,.07);line-height:1;pointer-events:none}
+.dStars{color:var(--ouro);font-size:.9rem;margin-bottom:.9rem;letter-spacing:2px}
+.dTxt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.08rem;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:1.4rem}
+.dAutor{display:flex;align-items:center;gap:.9rem}
+.dAv{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--v4),var(--rosa));display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.86rem;color:#fff;flex-shrink:0}
+.dNome{font-weight:500;font-size:.88rem;color:var(--creme)}
+.dVia{font-size:.73rem;color:rgba(255,255,255,.38)}
+
+/* FLOATING */
+.fbg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fb{position:absolute;animation:fbF linear infinite;opacity:0}
+@keyframes fbF{0%{transform:translateY(105vh) rotate(0deg);opacity:0}5%{opacity:.12}95%{opacity:.12}100%{transform:translateY(-10vh) rotate(720deg);opacity:0}}
+
+/* FOOTER */
+.ftr{background:#10051E;padding:5rem 0 2.5rem}
+.ftGrid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.ftLogo{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--v6);font-weight:600;display:block;margin-bottom:.9rem}
+.ftBrand p{color:rgba(255,255,255,.4);font-size:.86rem;line-height:1.7;max-width:290px}
+.ftSoc{display:flex;gap:.7rem;margin-top:1.4rem}
+.ftSBtn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(168,85,200,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:.2s;color:rgba(255,255,255,.45)}
+.ftSBtn:hover{border-color:var(--v5);color:var(--v5);transform:translateY(-2px)}
+.ftCol h5{font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--v5);margin-bottom:1.4rem}
+.ftCol ul{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+.ftCol ul li{color:rgba(255,255,255,.45);font-size:.86rem;display:flex;align-items:flex-start;gap:.5rem}
+.ftBot{border-top:1px solid rgba(168,85,200,.1);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ftBot p{color:rgba(255,255,255,.2);font-size:.78rem}
+
+.toast{position:fixed;top:90px;left:50%;transform:translateX(-50%) translateY(-16px);background:linear-gradient(135deg,var(--v4),var(--v5));color:#fff;padding:.75rem 2rem;border-radius:50px;z-index:99999;opacity:0;transition:.3s;pointer-events:none;font-size:.88rem;font-weight:500}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}.nLinks{display:none}
+  .hc{grid-template-columns:1fr;text-align:center;gap:2rem}
+  .hero h1{font-size:3rem}.hDesc{margin:0 auto 2rem}.hBtns{justify-content:center}.hStats{justify-content:center}
+  #cakeC{max-width:280px;height:280px}
+  .sGrid{grid-template-columns:1fr}.sCards{display:none}
+  .pGrid{grid-template-columns:1fr}.cSteps{grid-template-columns:repeat(2,1fr)}
+  .fGrid{grid-column:1fr}.dGrid{grid-template-columns:1fr}.ftGrid{grid-template-columns:1fr}
+  .con{padding:0 1.5rem}.sec{padding:4.5rem 0}
+  .waf{bottom:14px;right:14px}.igf{bottom:14px;left:14px}.mascote{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div><div id="curR"></div>
+<div class="toast" id="toast"></div>
+<div class="fbg" id="fbg"></div>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="sStars" id="sStars"></div>
+  <div class="dollWrap">
+    <div class="dollBalao">
+      <div class="bTitle">Oi! Seja bem-vinda ao<br><em>Doces Mamel</em> ✨</div>
+      <div class="bSub">Role para baixo e tire todas as suas dúvidas. Escolha um de nossos doces e olha — são os melhores da região! 🍫🎂</div>
+      <div class="bTip">↓ Clique para entrar e descobrir um mundo de doçura ↓</div>
+    </div>
+    <canvas id="dollC" width="160" height="220"></canvas>
+    <button class="splashBtn" id="splashBtn">Entrar no site ✦</button>
+  </div>
+</div>
+
+<!-- WA -->
+<div class="waf">
+  <div class="wal">Fale conosco agora! 💬</div>
+  <a href="https://wa.me/5511976100068?text=Olá!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido!" target="_blank" class="wab">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<!-- IG -->
+<div class="igf">
+  <a href="https://www.instagram.com/docesmamel_" target="_blank" class="igb" title="@docesmamel_">
+    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  </a>
+</div>
+
+<!-- MASCOTE -->
+<div class="mascote">
+  <div class="mBal" id="mBal">Doces fresquinhos com ❤️</div>
+  <svg id="mSvg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="40" cy="58" rx="23" ry="16" fill="#7B3FA8"/>
+    <path d="M17 54 Q23 45 31 50 Q36 41 40 47 Q44 39 49 46 Q57 43 63 54 Q63 58 40 58 Q17 58 17 54Z" fill="#E8C8F5"/>
+    <path d="M25 51 Q31 47 37 51 Q40 46 44 51 Q49 48 55 52" stroke="#C78AE0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <rect x="37" y="30" width="6" height="16" rx="3" fill="#A855C8"/>
+    <ellipse cx="40" cy="27" rx="4" ry="6" fill="#FF9A3C" opacity=".9"/>
+    <ellipse cx="40" cy="28" rx="2.5" ry="4" fill="#FFF3A0"/>
+    <circle cx="34" cy="55" r="2.5" fill="#1A0A2E"/>
+    <circle cx="46" cy="55" r="2.5" fill="#1A0A2E"/>
+    <circle cx="35" cy="54" r=".8" fill="#fff"/>
+    <circle cx="47" cy="54" r=".8" fill="#fff"/>
+    <path d="M35 60 Q40 65 45 60" stroke="#1A0A2E" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="30" cy="57" rx="4" ry="2.5" fill="#D472B8" opacity=".55"/>
+    <ellipse cx="50" cy="57" rx="4" ry="2.5" fill="#D472B8" opacity=".55"/>
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nLogo">Doces <em>Mamel</em></div>
+  <ul class="nLinks">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#cardapio">Cardápio</a></li>
+    <li><a href="#encomenda">Encomendas</a></li>
+    <li><a href="#avaliacoes">Avaliações</a></li>
+    <li><a href="#encomenda" class="nCta">Pedir agora ✦</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="heroBg"></div>
+  <div class="hc">
+    <div>
+      <div class="hEye">✦ Rio Grande da Serra · SP ✦</div>
+      <h1>
+        <span class="h1l1">Momentos</span>
+        <span class="h1l2">Doces</span>
+        <span class="h1l3">Inesquecíveis</span>
+      </h1>
+      <p class="hDesc">Buffet de doces e sobremesas artesanais feitos com ingredientes selecionados e muito carinho. Cada detalhe pensado para sua celebração ser única.</p>
+      <div class="hBtns">
+        <a href="#encomenda" class="btnV">✦ Fazer Encomenda</a>
+        <a href="#cardapio" class="btnO">Ver Cardápio →</a>
+      </div>
+      <div class="hStats">
+        <div><span class="hSN">5,0</span><span class="hSL">★ Google</span></div>
+        <div class="hSep"></div>
+        <div><span class="hSN">100%</span><span class="hSL">Artesanal</span></div>
+        <div class="hSep"></div>
+        <div><span class="hSN">∞</span><span class="hSL">Amor</span></div>
+      </div>
+    </div>
+    <div class="h3d">
+      <div class="h3dGlow"></div>
+      <canvas id="cakeC"></canvas>
+    </div>
+  </div>
+  <div class="scrollInd"><span>Role para baixo</span><div class="scrollLine"></div></div>
+</section>
+
+<!-- SOBRE -->
+<section class="sec sobre" id="sobre">
+  <div class="con">
+    <div class="sGrid">
+      <div class="sCards rev">
+        <div class="sCard"><span class="bE">🍫</span><h4>Ingredientes Premium</h4><p>Selecionamos os melhores ingredientes para um sabor único em cada mordida</p></div>
+        <div class="sCard"><span class="bE">💜</span><h4>Feitos com Amor</h4><p>Cada doce preparado artesanalmente com dedicação e muito carinho</p></div>
+      </div>
+      <div class="sTxt rev">
+        <span class="sEye">Nossa história</span>
+        <h2>Adoçando vidas em <em>Rio Grande da Serra</em></h2>
+        <p>A Doces Mamel nasceu da paixão de transformar ingredientes simples em experiências memoráveis. Cada encomenda é tratada com dedicação especial, porque acreditamos que cada celebração merece o melhor.</p>
+        <p>Especializados em buffet de doces e sobremesas para festas, casamentos, aniversários e eventos. Entregamos não apenas doces — entregamos momentos.</p>
+        <div class="sInfos">
+          <div class="sInfo"><span class="ico">📍</span><div><strong>Endereço</strong><span>R. das Rosas, 54 · Recanto das Flores · Rio Grande da Serra - SP</span></div></div>
+          <div class="sInfo"><span class="ico">🕐</span><div><strong>Horário</strong><span>Terça a Domingo · A partir das 14h30</span></div></div>
+          <div class="sInfo"><span class="ico">📦</span><div><strong>Delivery disponível</strong><span>Entrega sem contato · Rio Grande da Serra e região</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDÁPIO -->
+<section class="sec prod" id="cardapio">
+  <div class="con">
+    <div class="sHdr rev"><span class="sEye">✦ Cardápio</span><h2 class="sTitle">Nossas <em>Especialidades</em></h2><div class="sDiv"></div><p class="sSub">Doces e sobremesas criados com ingredientes selecionados para tornar cada momento especial</p></div>
+    <div class="pGrid">
+      <div class="pCard rev"><div class="pEW">🍫</div><h3>Brigadeiros Gourmet</h3><p>Chocolate belga, pistache, maracujá, limão siciliano e sabores especiais feitos com carinho.</p><div class="pTags"><span class="tag">Festas</span><span class="tag">Gourmet</span><span class="tag">Personalizado</span></div><div class="pFoot"><span class="pPre">Consulte ✦</span><button class="pBtn" onclick="gotoForm('Brigadeiros Gourmet')">Pedir →</button></div></div>
+      <div class="pCard rev"><div class="pEW">🎂</div><h3>Buffet de Sobremesas</h3><p>Mesa completa e decorada para casamentos, formaturas, aniversários e eventos corporativos.</p><div class="pTags"><span class="tag">Eventos</span><span class="tag">Casamentos</span><span class="tag">Buffet</span></div><div class="pFoot"><span class="pPre">Consulte ✦</span><button class="pBtn" onclick="gotoForm('Buffet de Sobremesas')">Pedir →</button></div></div>
+      <div class="pCard rev"><div class="pEW">🍬</div><h3>Doces Finos</h3><p>Cajuzinhos, olho de sogra, beijinhos, bem-casados e delícias tradicionais para sua mesa.</p><div class="pTags"><span class="tag">Tradicionais</span><span class="tag">Finos</span></div><div class="pFoot"><span class="pPre">Consulte ✦</span><button class="pBtn" onclick="gotoForm('Doces Finos')">Pedir →</button></div></div>
+      <div class="pCard rev"><div class="pEW">🧁</div><h3>Cupcakes Decorados</h3><p>Personalizados no tema da sua festa, com decoração artesanal e muito capricho.</p><div class="pTags"><span class="tag">Personalizado</span><span class="tag">Infantil</span></div><div class="pFoot"><span class="pPre">Consulte ✦</span><button class="pBtn" onclick="gotoForm('Cupcakes Decorados')">Pedir →</button></div></div>
+      <div class="pCard rev"><div class="pEW">🍰</div><h3>Tortas & Bolos</h3><p>Bolos decorados e tortas especiais para aniversários, comemorações e datas especiais.</p><div class="pTags"><span class="tag">Aniversário</span><span class="tag">Especial</span></div><div class="pFoot"><span class="pPre">Consulte ✦</span><button class="pBtn" onclick="gotoForm('Tortas e Bolos')">Pedir →</button></div></div>
+      <div class="pCard rev"><div class="pEW">🎁</div><h3>Caixas Presente</h3><p>Caixas exclusivas com doces sortidos, belamente embaladas para presentear com estilo.</p><div class="pTags"><span class="tag">Presente</span><span class="tag">Delivery</span></div><div class="pFoot"><span class="pPre">Consulte ✦</span><button class="pBtn" onclick="gotoForm('Caixas Presente')">Pedir →</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO -->
+<section class="sec como" id="como">
+  <div class="con">
+    <div class="sHdr rev"><span class="sEye">✦ Processo</span><h2 class="sTitle">Como <em>Funciona?</em></h2><div class="sDiv"></div></div>
+    <div class="cSteps">
+      <div class="step rev"><div class="stepConn"></div><div class="stepN">1</div><span class="stepE">📋</span><h4>Faça seu pedido</h4><p>Preencha o formulário ou fale pelo WhatsApp com os detalhes que desejar.</p></div>
+      <div class="step rev"><div class="stepConn"></div><div class="stepN">2</div><span class="stepE">💬</span><h4>Alinhamos tudo</h4><p>Confirmamos sabores, quantidades, tema e datas. Personalizamos como imaginou.</p></div>
+      <div class="step rev"><div class="stepConn"></div><div class="stepN">3</div><span class="stepE">🍫</span><h4>Preparamos com amor</h4><p>Seus doces artesanais são preparados com ingredientes selecionados para a data.</p></div>
+      <div class="step rev"><div class="stepN">4</div><span class="stepE">🎉</span><h4>Celebre!</h4><p>Retire ou receba sua encomenda e aproveite cada momento especial.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section class="sec formSec" id="encomenda">
+  <div class="con">
+    <div class="sHdr rev"><span class="sEye">✦ Encomendas</span><h2 class="sTitle">Faça sua <em>Encomenda</em></h2><div class="sDiv"></div><p class="sSub">Preencha o formulário ou fale diretamente pelo WhatsApp — como preferir!</p></div>
+    <div class="fWrap rev">
+      <div class="fHd"><h3>✦ Formulário de Pedido</h3><p>Preencha os campos e entraremos em contato para confirmar sua encomenda</p></div>
+      <div class="fBd" id="fBd">
+        <div class="fGrid">
+          <div class="fG"><label>Seu nome *</label><input type="text" id="fN" placeholder="Como podemos te chamar?"></div>
+          <div class="fG"><label>WhatsApp *</label><input type="tel" id="fT" placeholder="(11) 99999-9999"></div>
+          <div class="fG"><label>Tipo de pedido</label><select id="fTp"><option value="">Selecione o tipo de doce...</option><option>Brigadeiros Gourmet</option><option>Buffet de Sobremesas completo</option><option>Doces Finos variados</option><option>Cupcakes Decorados</option><option>Tortas & Bolos</option><option>Caixas Presente</option><option>Mix / Vários tipos</option></select></div>
+          <div class="fG"><label>Ocasião</label><select id="fOc"><option value="">Qual é a celebração?</option><option>Aniversário</option><option>Casamento</option><option>Formatura</option><option>Chá de bebê / Chá revelação</option><option>Evento corporativo</option><option>Presente especial</option><option>Outra ocasião</option></select></div>
+          <div class="fG"><label>Data do evento *</label><input type="date" id="fDt"></div>
+          <div class="fG"><label>Quantidade estimada</label><select id="fQt"><option value="">Quantas pessoas?</option><option>Até 30 pessoas</option><option>30 a 80 pessoas</option><option>80 a 150 pessoas</option><option>Acima de 150 pessoas</option><option>Não sei ainda</option></select></div>
+          <div class="fG full"><label>Detalhes do pedido</label><textarea id="fDe" placeholder="Sabores favoritos, tema da festa, cores, referências, restrições alimentares... Quanto mais detalhes, melhor! 🎂"></textarea></div>
+        </div>
+        <div class="fFt">
+          <p>Prefere ir direto? Fale agora pelo WhatsApp sem precisar preencher! 💬</p>
+          <div class="fBtns">
+            <a href="https://wa.me/5511976100068?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" class="btnWa"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp direto</a>
+            <button class="btnSub" onclick="enviar()">Enviar pedido ✦</button>
+          </div>
+        </div>
+      </div>
+      <div class="fSuc" id="fSuc"><div class="bigC">🎉</div><h4>Pedido recebido!</h4><p>Obrigada pelo interesse! Entraremos em contato pelo WhatsApp em breve para confirmar todos os detalhes.</p><br><a href="https://wa.me/5511976100068" target="_blank" class="btnWa" style="display:inline-flex;margin-top:1rem">💬 Confirmar pelo WhatsApp</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="sec depo" id="avaliacoes">
+  <div class="con">
+    <div class="sHdr rev"><span class="sEye">✦ Avaliações</span><h2 class="sTitle">O que dizem nossos <em>clientes</em></h2><div class="sDiv"></div></div>
+    <div class="dGrid">
+      <div class="dCard rev"><div class="dStars">★★★★★</div><p class="dTxt">"Super recomendo, doces muito bons! Encomendei para minha festa e todos ficaram encantados com a qualidade e apresentação. Com certeza voltarei a pedir!"</p><div class="dAutor"><div class="dAv">CS</div><div><div class="dNome">Cláudia Silva</div><div class="dVia">Google · ⭐ 5,0 · Avaliação verificada</div></div></div></div>
+      <div class="dCard rev"><div class="dStars">★★★★★</div><p class="dTxt">"Doces muito bons! A qualidade é notável. Fiz pedido para evento familiar e todos elogiaram muito. Atendimento excelente e pontualidade na entrega!"</p><div class="dAutor"><div class="dAv">PV</div><div><div class="dNome">Paulo Vieira</div><div class="dVia">Google · ⭐ 5,0 · Avaliação verificada</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ftr">
+  <div class="con">
+    <div class="ftGrid">
+      <div class="ftBrand rev"><span class="ftLogo">Doces Mamel</span><p>Buffet de doces e sobremesas artesanais em Rio Grande da Serra. Feitos com ingredientes selecionados e muito carinho.</p>
+        <div class="ftSoc">
+          <a href="https://www.instagram.com/docesmamel_" target="_blank" class="ftSBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://wa.me/5511976100068" target="_blank" class="ftSBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        </div>
+      </div>
+      <div class="ftCol rev"><h5>Informações</h5><ul><li><span>📍</span>R. das Rosas, 54 · Recanto das Flores · Rio Grande da Serra - SP</li><li><span>📱</span>(11) 97610-0068</li><li><span>🕐</span>Ter a Dom · 14h30 em diante</li><li><span>📦</span>Delivery disponível</li></ul></div>
+      <div class="ftCol rev"><h5>Redes Sociais</h5><ul><li><span>📸</span><a href="https://www.instagram.com/docesmamel_" target="_blank" style="color:#C78AE0;text-decoration:none">@docesmamel_</a></li><li><span>💬</span><a href="https://wa.me/5511976100068" target="_blank" style="color:#25D366;text-decoration:none">(11) 97610-0068</a></li><li><span>⭐</span>Avaliação 5,0 no Google</li></ul><div style="margin-top:2rem"><a href="#encomenda" class="btnV" style="font-size:.83rem;padding:.7rem 1.5rem">✦ Fazer Encomenda</a></div></div>
+    </div>
+    <div class="ftBot"><p>© 2025 Doces Mamel · Rio Grande da Serra, SP</p><p>Feito com 💜 para adoçar momentos especiais</p></div>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button,.pCard,.step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';curR.style.transform='translate(-50%,-50%) scale(1.5)'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';curR.style.transform='translate(-50%,-50%) scale(1)'});
+});
+
+// SPLASH STARS
+const ss=document.getElementById('sStars');
+for(let i=0;i<80;i++){const s=document.createElement('div');s.className='sStar';const sz=Math.random()*3+1;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${Math.random()*3+1.5}s;animation-delay:${Math.random()*3}s`;ss.appendChild(s);}
+
+// DOLL ANIMATION
+const dc=document.getElementById('dollC'),dCtx=dc.getContext('2d');
+let dT=0;
+function drawDoll(){
+  dCtx.clearRect(0,0,160,220);
+  const bob=Math.sin(dT*2)*4;
+  const blinkP=(dT*28)%100;
+  const blink=blinkP>96;
+  const arm=Math.sin(dT*1.8)*20;
+
+  // shadow
+  dCtx.save();dCtx.beginPath();dCtx.ellipse(80,206,26,7,0,0,Math.PI*2);
+  const sg=dCtx.createRadialGradient(80,206,2,80,206,26);sg.addColorStop(0,'rgba(0,0,0,.35)');sg.addColorStop(1,'rgba(0,0,0,0)');dCtx.fillStyle=sg;dCtx.fill();dCtx.restore();
+
+  dCtx.save();dCtx.translate(80,112+bob);
+
+  // SAIA
+  dCtx.beginPath();dCtx.moveTo(-28,28);dCtx.quadraticCurveTo(-44,78,-28,90);dCtx.lineTo(28,90);dCtx.quadraticCurveTo(44,78,28,28);dCtx.closePath();
+  const sG=dCtx.createLinearGradient(-28,28,28,90);sG.addColorStop(0,'#9B3FC8');sG.addColorStop(.5,'#7B2FA8');sG.addColorStop(1,'#5B1F88');dCtx.fillStyle=sG;dCtx.fill();
+  // detalhes saia
+  for(let i=0;i<3;i++){dCtx.beginPath();dCtx.moveTo(-24,48+i*16);dCtx.quadraticCurveTo(0,56+i*16,24,48+i*16);dCtx.strokeStyle=`rgba(199,138,224,${.35-i*.08})`;dCtx.lineWidth=1.5;dCtx.stroke();}
+  // pompons borda
+  for(let i=0;i<5;i++){const px=-22+i*11,py=90;dCtx.beginPath();dCtx.arc(px,py,5,0,Math.PI*2);dCtx.fillStyle='#C78AE0';dCtx.fill();}
+
+  // CORPO
+  dCtx.beginPath();dCtx.roundRect(-20,-14,40,44,8);
+  const bG=dCtx.createLinearGradient(-20,-14,20,30);bG.addColorStop(0,'#C060C8');bG.addColorStop(1,'#A040A8');dCtx.fillStyle=bG;dCtx.fill();
+  // laço peito
+  dCtx.save();dCtx.translate(0,6);
+  dCtx.beginPath();dCtx.ellipse(-7,0,7,4,-0.5,0,Math.PI*2);dCtx.fillStyle='#D472B8';dCtx.fill();
+  dCtx.beginPath();dCtx.ellipse(7,0,7,4,0.5,0,Math.PI*2);dCtx.fill();
+  dCtx.beginPath();dCtx.arc(0,0,3.5,0,Math.PI*2);dCtx.fillStyle='#F0A0D8';dCtx.fill();dCtx.restore();
+
+  // BRAÇOS
+  dCtx.save();dCtx.translate(-20,0);dCtx.rotate((-arm)*Math.PI/180);
+  dCtx.beginPath();dCtx.roundRect(-11,0,11,28,5);dCtx.fillStyle='#F0D8F8';dCtx.fill();
+  dCtx.beginPath();dCtx.arc(-5,30,7,0,Math.PI*2);dCtx.fillStyle='#F5E5FF';dCtx.fill();dCtx.restore();
+  dCtx.save();dCtx.translate(20,0);dCtx.rotate((arm)*Math.PI/180);
+  dCtx.beginPath();dCtx.roundRect(0,0,11,28,5);dCtx.fillStyle='#F0D8F8';dCtx.fill();
+  dCtx.beginPath();dCtx.arc(5,30,7,0,Math.PI*2);dCtx.fillStyle='#F5E5FF';dCtx.fill();dCtx.restore();
+
+  // PESCOÇO
+  dCtx.beginPath();dCtx.roundRect(-7,-23,14,12,4);dCtx.fillStyle='#F5E5FF';dCtx.fill();
+
+  // CABEÇA
+  dCtx.beginPath();dCtx.ellipse(0,-40,24,27,0,0,Math.PI*2);
+  const hG=dCtx.createRadialGradient(-6,-46,4,0,-40,27);hG.addColorStop(0,'#FDEEF5');hG.addColorStop(1,'#F0D0E8');dCtx.fillStyle=hG;dCtx.fill();
+  // bochechas
+  dCtx.beginPath();dCtx.ellipse(-15,-38,7,5,0,0,Math.PI*2);dCtx.fillStyle='rgba(212,114,184,.38)';dCtx.fill();
+  dCtx.beginPath();dCtx.ellipse(15,-38,7,5,0,0,Math.PI*2);dCtx.fill();
+
+  // OLHOS
+  if(!blink){
+    dCtx.beginPath();dCtx.ellipse(-9,-43,4.5,5.5,0,0,Math.PI*2);dCtx.fillStyle='#3D1C5C';dCtx.fill();
+    dCtx.beginPath();dCtx.ellipse(9,-43,4.5,5.5,0,0,Math.PI*2);dCtx.fill();
+    dCtx.beginPath();dCtx.arc(-7,-45,1.8,0,Math.PI*2);dCtx.fillStyle='#fff';dCtx.fill();
+    dCtx.beginPath();dCtx.arc(11,-45,1.8,0,Math.PI*2);dCtx.fill();
+    // cílios
+    dCtx.strokeStyle='#3D1C5C';dCtx.lineWidth=1.5;
+    [[-14,-50],[-9,-51],[-4,-50]].forEach(p=>{dCtx.beginPath();dCtx.moveTo(p[0],-47);dCtx.lineTo(p[0]-1,p[1]);dCtx.stroke();});
+    [[4,-50],[9,-51],[14,-50]].forEach(p=>{dCtx.beginPath();dCtx.moveTo(p[0],-47);dCtx.lineTo(p[0]+1,p[1]);dCtx.stroke();});
+  } else {
+    dCtx.strokeStyle='#3D1C5C';dCtx.lineWidth=2.5;
+    dCtx.beginPath();dCtx.moveTo(-13,-43);dCtx.lineTo(-5,-42);dCtx.stroke();
+    dCtx.beginPath();dCtx.moveTo(5,-43);dCtx.lineTo(13,-42);dCtx.stroke();
+  }
+
+  // NARIZ
+  dCtx.beginPath();dCtx.arc(0,-35,2.2,0,Math.PI*2);dCtx.fillStyle='rgba(200,130,180,.35)';dCtx.fill();
+  // SORRISO
+  const sm=0.28+Math.sin(dT*1.5)*.08;
+  dCtx.beginPath();dCtx.moveTo(-9,-28);dCtx.quadraticCurveTo(0,-28+sm*20,9,-28);dCtx.strokeStyle='#9B3B7A';dCtx.lineWidth=2;dCtx.stroke();
+
+  // CABELO
+  dCtx.beginPath();dCtx.ellipse(0,-62,19,11,0,0,Math.PI*2);dCtx.fillStyle='#7B3FAA';dCtx.fill();
+  dCtx.beginPath();dCtx.ellipse(-21,-48,9,17,-.3,0,Math.PI*2);dCtx.fill();
+  dCtx.beginPath();dCtx.ellipse(21,-48,9,17,.3,0,Math.PI*2);dCtx.fill();
+  // ondas topo
+  dCtx.beginPath();dCtx.moveTo(-17,-65);
+  for(let i=0;i<5;i++){const x=-17+i*8.5;dCtx.quadraticCurveTo(x+2,-76,x+8.5,-65);}
+  dCtx.fillStyle='#8B4BBB';dCtx.fill();
+  // laço cabelo
+  dCtx.save();dCtx.translate(17,-65);
+  dCtx.beginPath();dCtx.ellipse(-6,0,6,4,-0.5,0,Math.PI*2);dCtx.fillStyle='#F0A0D8';dCtx.fill();
+  dCtx.beginPath();dCtx.ellipse(6,0,6,4,0.5,0,Math.PI*2);dCtx.fill();
+  dCtx.beginPath();dCtx.arc(0,0,3.5,0,Math.PI*2);dCtx.fillStyle='#fff';dCtx.fill();dCtx.restore();
+
+  // PERNAS
+  dCtx.beginPath();dCtx.roundRect(-13,88,11,24,5);dCtx.fillStyle='#F0D8F8';dCtx.fill();
+  dCtx.beginPath();dCtx.roundRect(2,88,11,24,5);dCtx.fill();
+  // sapatinhos
+  dCtx.beginPath();dCtx.ellipse(-7,114,9,5.5,0,0,Math.PI*2);dCtx.fillStyle='#A855C8';dCtx.fill();
+  dCtx.beginPath();dCtx.ellipse(7,114,9,5.5,0,0,Math.PI*2);dCtx.fill();
+  // lacinhos sapato
+  dCtx.beginPath();dCtx.arc(-7,109,3,0,Math.PI*2);dCtx.fillStyle='#F0A0D8';dCtx.fill();
+  dCtx.beginPath();dCtx.arc(7,109,3,0,Math.PI*2);dCtx.fill();
+
+  dCtx.restore();
+
+  // SPARKLES
+  [[14,18],[146,32],[10,152],[150,138],[80,4],[130,180]].forEach((sp,i)=>{
+    const a=dT*1.5+i*1.2;const op=0.4+Math.sin(a)*.4;
+    dCtx.save();dCtx.globalAlpha=op;dCtx.translate(sp[0],sp[1]);dCtx.rotate(a);
+    dCtx.beginPath();
+    for(let j=0;j<5;j++){const a2=(j/5)*Math.PI*2-Math.PI/2;const a3=a2+Math.PI/5;dCtx.lineTo(Math.cos(a2)*6,Math.sin(a2)*6);dCtx.lineTo(Math.cos(a3)*3,Math.sin(a3)*3);}
+    dCtx.closePath();dCtx.fillStyle=i%2===0?'#C78AE0':'#F0A0D8';dCtx.fill();dCtx.restore();
+  });
+
+  dT+=0.025;requestAnimationFrame(drawDoll);
+}
+drawDoll();
+
+// SPLASH BTN
+document.getElementById('splashBtn').addEventListener('click',()=>{
+  const sp=document.getElementById('splash');sp.classList.add('splashOut');
+  setTimeout(()=>{sp.style.display='none'},600);
+});
+
+// NAV SCROLL
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>60));
+
+// FLOATING SWEETS
+const swts=['🍫','🍬','🍭','🎂','🧁','✦','💜','🌸','🍰'];
+const fb=document.getElementById('fbg');
+for(let i=0;i<20;i++){const s=document.createElement('div');s.className='fb';s.textContent=swts[Math.floor(Math.random()*swts.length)];s.style.cssText=`left:${Math.random()*100}%;font-size:${Math.random()*18+10}px;animation-duration:${Math.random()*18+14}s;animation-delay:${Math.random()*18}s`;fb.appendChild(s);}
+
+// 3D PARTY CAKE
+const cc=document.getElementById('cakeC'),ctx=cc.getContext('2d');
+cc.width=420;cc.height=420;
+let cA=0;
+
+function drawCake(){
+  ctx.clearRect(0,0,420,420);
+  const cx=210,cy=220,t=cA;
+
+  // shadow
+  ctx.save();ctx.beginPath();ctx.ellipse(cx,310,112,18,0,0,Math.PI*2);
+  const sg=ctx.createRadialGradient(cx,310,8,cx,310,112);sg.addColorStop(0,'rgba(0,0,0,.45)');sg.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=sg;ctx.fill();ctx.restore();
+
+  function layer(y1,y2,rx,ry,sCol,tCol,tStr,dots,dotCol){
+    const N=64;ctx.beginPath();
+    for(let i=0;i<=N;i++){const a=(i/N)*Math.PI*2;ctx.lineTo(cx+Math.cos(a)*rx,y1+Math.sin(a)*ry);}
+    for(let i=N;i>=0;i--){const a=(i/N)*Math.PI*2;ctx.lineTo(cx+Math.cos(a)*rx,y2+Math.sin(a)*ry);}
+    ctx.closePath();ctx.fillStyle=sCol;ctx.fill();
+    ctx.beginPath();ctx.ellipse(cx,y1,rx,ry,0,0,Math.PI*2);ctx.fillStyle=tCol;ctx.fill();
+    if(tStr){ctx.strokeStyle=tStr;ctx.lineWidth=1.5;ctx.stroke();}
+    if(dots){for(let i=0;i<dots;i++){const a=(i/dots)*Math.PI*2+t*0.18;ctx.beginPath();ctx.arc(cx+Math.cos(a)*rx,y1+Math.sin(a)*ry,4,0,Math.PI*2);ctx.fillStyle=dotCol||'rgba(232,200,245,.75)';ctx.fill();}}
+  }
+
+  // BASE LAYER (violet dark)
+  const b3=295,h3=68,r3x=155,r3y=32;
+  const s3=ctx.createLinearGradient(cx-r3x,b3-h3,cx+r3x,b3);s3.addColorStop(0,'#3B1568');s3.addColorStop(.5,'#5A2898');s3.addColorStop(1,'#3B1568');
+  layer(b3-h3,b3,r3x,r3y,s3,'#7B3FA8','#9B59C8',22,'rgba(232,200,245,.8)');
+  // horizontal stripes layer 3
+  for(let i=0;i<3;i++){ctx.beginPath();for(let j=0;j<=64;j++){const a=(j/64)*Math.PI*2;ctx.lineTo(cx+Math.cos(a)*r3x,b3-h3+12+i*18+Math.sin(a)*r3y*.28);}ctx.strokeStyle=`rgba(199,138,224,${.28-i*.06})`;ctx.lineWidth=1;ctx.stroke();}
+  // confetes base
+  const confColors=['#E8C8F5','#F0A0D8','#D4A853','#fff'];
+  for(let i=0;i<30;i++){const a=(i/30)*Math.PI*2+t*.25;const r=r3x*(0.4+Math.random()*.5);ctx.save();ctx.globalAlpha=.6;ctx.translate(cx+Math.cos(a)*r,b3-h3*.6+Math.sin(a)*r3y*.5);ctx.rotate(t+i);const w=4,h=2;ctx.fillStyle=confColors[i%4];ctx.fillRect(-w/2,-h/2,w,h);ctx.restore();}
+
+  // CREAM base-mid
+  for(let i=0;i<16;i++){const a=(i/16)*Math.PI*2+t*.22;const px=cx+Math.cos(a)*r3x*.87,py=b3-h3+Math.sin(a)*r3y*.6;ctx.beginPath();ctx.arc(px,py,9,0,Math.PI*2);const cg=ctx.createRadialGradient(px,py,2,px,py,9);cg.addColorStop(0,'#FDEEF8');cg.addColorStop(1,'rgba(253,238,248,.65)');ctx.fillStyle=cg;ctx.fill();}
+
+  // MID LAYER (violet mid)
+  const b2=240,h2=58,r2x=120,r2y=26;
+  const s2=ctx.createLinearGradient(cx-r2x,b2-h2,cx+r2x,b2);s2.addColorStop(0,'#7A2898');s2.addColorStop(.5,'#9A3FA8');s2.addColorStop(1,'#7A2898');
+  layer(b2-h2,b2,r2x,r2y,s2,'#A855C8','#C278D8',12,'rgba(232,200,245,.8)');
+  // flores mid
+  for(let i=0;i<10;i++){const a=(i/10)*Math.PI*2+t*.3+1;const px=cx+Math.cos(a)*r2x*.72,py=b2-h2*.55+Math.sin(a)*r2y*.4;ctx.save();ctx.translate(px,py);for(let p=0;p<5;p++){ctx.beginPath();ctx.save();ctx.rotate((p/5)*Math.PI*2);ctx.ellipse(4,0,4,2.5,0,0,Math.PI*2);ctx.fillStyle='rgba(240,160,216,.6)';ctx.fill();ctx.restore();}ctx.beginPath();ctx.arc(0,0,3,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.restore();}
+  // stars mid
+  for(let i=0;i<8;i++){const a=(i/8)*Math.PI*2+t*.5;const px=cx+Math.cos(a)*r2x*.55,py=b2-h2+Math.sin(a)*r2y*.35;ctx.save();ctx.translate(px,py);ctx.rotate(t+i);ctx.beginPath();for(let j=0;j<5;j++){const a2=(j/5)*Math.PI*2-Math.PI/2;const a3=a2+Math.PI/5;ctx.lineTo(Math.cos(a2)*5,Math.sin(a2)*5);ctx.lineTo(Math.cos(a3)*2.5,Math.sin(a3)*2.5);}ctx.closePath();ctx.fillStyle='rgba(255,240,200,.75)';ctx.fill();ctx.restore();}
+
+  // CREAM mid-top
+  for(let i=0;i<12;i++){const a=(i/12)*Math.PI*2+t*.28;const px=cx+Math.cos(a)*r2x*.84,py=b2-h2+Math.sin(a)*r2y*.58;ctx.beginPath();ctx.arc(px,py,8,0,Math.PI*2);ctx.fillStyle='rgba(253,238,248,.88)';ctx.fill();}
+
+  // TOP LAYER (lavender/pink)
+  const b1=188,h1=52,r1x=86,r1y=20;
+  const s1=ctx.createLinearGradient(cx-r1x,b1-h1,cx+r1x,b1);s1.addColorStop(0,'#9B3FA8');s1.addColorStop(.5,'#C060C8');s1.addColorStop(1,'#9B3FA8');
+  layer(b1-h1,b1,r1x,r1y,s1,'#D472B8','#E88ACC',10,'rgba(255,230,255,.9)');
+
+  // CREAM top
+  ctx.save();ctx.translate(cx,b1-h1-4);
+  for(let i=0;i<8;i++){const a=(i/8)*Math.PI*2+t*.12;ctx.beginPath();ctx.arc(Math.cos(a)*r1x*.55,Math.sin(a)*r1y*.4-4,9,0,Math.PI*2);ctx.fillStyle='rgba(253,238,248,.92)';ctx.fill();}
+  ctx.beginPath();ctx.ellipse(0,-8,28,16,0,0,Math.PI*2);ctx.fillStyle='rgba(253,238,248,.88)';ctx.fill();ctx.restore();
+
+  // BALLOONS (festive!)
+  const balloons=[{x:-55,y:-35,c:'#E84393',c2:'#FF7BBF'},{x:55,y:-30,c:'#D4A853',c2:'#F5CC85'},{x:-30,y:-55,c:'#A855C8',c2:'#D4A0E8'},{x:35,y:-52,c:'#E84040',c2:'#FF9090'}];
+  balloons.forEach((b,bi)=>{
+    const bx=cx+b.x+Math.cos(t*.8+bi)*6,by=b1-h1+b.y+Math.sin(t*.8+bi)*4;
+    ctx.save();
+    ctx.beginPath();ctx.ellipse(bx,by,13,16,0,0,Math.PI*2);
+    const bg=ctx.createRadialGradient(bx-4,by-5,2,bx,by,16);bg.addColorStop(0,b.c2);bg.addColorStop(1,b.c);ctx.fillStyle=bg;ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,.15)';ctx.lineWidth=0.5;ctx.stroke();
+    // nó
+    ctx.beginPath();ctx.arc(bx,by+16,2.5,0,Math.PI*2);ctx.fillStyle=b.c;ctx.fill();
+    // fio
+    ctx.beginPath();ctx.moveTo(bx,by+18);
+    const waveX=Math.sin(t*.5+bi)*5;ctx.quadraticCurveTo(bx+waveX,by+38,bx,by+55);
+    ctx.strokeStyle=`rgba(${bi%2===0?'180,80,160':'160,80,180'},.6)`;ctx.lineWidth=1;ctx.stroke();
+    ctx.restore();
+  });
+
+  // STRAWBERRIES
+  [{t2:.4,r:.58},{t2:2,r:.5},{t2:3.5,r:.62},{t2:4.8,r:.42},{t2:6,r:.52}].forEach(sb=>{
+    const a=sb.t2+t*.3;const px=cx+Math.cos(a)*r1x*sb.r*.82,py=b1-h1-10+Math.sin(a)*r1y*.32;
+    ctx.save();ctx.translate(px,py);
+    ctx.beginPath();ctx.arc(0,0,8,0,Math.PI*2);ctx.fillStyle='#C0392B';ctx.fill();
+    ctx.fillStyle='rgba(255,220,220,.45)';[[0,-4],[3,1],[-3,1],[0,4]].forEach(s=>{ctx.beginPath();ctx.arc(s[0],s[1],1.2,0,Math.PI*2);ctx.fill();});
+    ctx.beginPath();ctx.moveTo(0,-8);ctx.lineTo(-3,-13);ctx.lineTo(0,-11);ctx.lineTo(3,-13);ctx.closePath();ctx.fillStyle='#27AE60';ctx.fill();
+    ctx.beginPath();ctx.arc(-3,-3,2.5,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.4)';ctx.fill();
+    ctx.restore();
+  });
+
+  // CANDLES
+  [{ang:0,r:.3,c:'#D4A853'},{ang:2.1,r:.28,c:'#C78AE0'},{ang:4.2,r:.35,c:'#F0A0D8'},{ang:5.3,r:.2,c:'#fff'}].forEach((cd,ci)=>{
+    const a=cd.ang+t*.2;const px=cx+Math.cos(a)*r1x*cd.r*.82,py=b1-h1-18+Math.sin(a)*r1y*.3;
+    ctx.save();ctx.translate(px,py);
+    ctx.beginPath();ctx.roundRect(-4,0,8,20,3);
+    const vg=ctx.createLinearGradient(-4,0,4,20);vg.addColorStop(0,cd.c);vg.addColorStop(1,'rgba(0,0,0,.2)');ctx.fillStyle=vg;ctx.fill();
+    [5,10,15].forEach(y=>{ctx.beginPath();ctx.moveTo(-4,y);ctx.lineTo(4,y);ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;ctx.stroke();});
+    const fl=Math.sin(Date.now()*.006+ci)*3;
+    ctx.beginPath();ctx.ellipse(0,-7+fl*.4,4,8+fl,0,0,Math.PI*2);ctx.fillStyle='rgba(255,160,0,.85)';ctx.fill();
+    ctx.beginPath();ctx.ellipse(0,-6+fl*.4,2,5+fl*.5,0,0,Math.PI*2);ctx.fillStyle='rgba(255,240,100,.9)';ctx.fill();
+    ctx.restore();
+  });
+
+  // CONFETTI BURST
+  for(let i=0;i<20;i++){
+    const a=(i/20)*Math.PI*2+t*.4;const r=r1x*(0.7+Math.sin(t*2+i)*.25)+r1x;
+    const sz=3+Math.sin(t+i)*2;
+    ctx.save();ctx.globalAlpha=0.6+Math.sin(t*2+i)*.3;
+    ctx.translate(cx+Math.cos(a)*r*.55,b1-h1-35+Math.sin(a)*r1y*2.5);ctx.rotate(t*2+i);
+    ctx.fillStyle=['#E8C8F5','#F0A0D8','#D4A853','#fff','#A855C8'][i%5];
+    ctx.fillRect(-sz/2,-sz/2,sz,sz*2);ctx.restore();
+  }
+
+  // PRATO
+  ctx.save();ctx.beginPath();ctx.ellipse(cx,302,142,24,0,0,Math.PI*2);
+  const pG=ctx.createLinearGradient(cx-142,302,cx+142,302);pG.addColorStop(0,'rgba(168,85,200,.08)');pG.addColorStop(.5,'rgba(199,138,224,.2)');pG.addColorStop(1,'rgba(168,85,200,.08)');ctx.fillStyle=pG;ctx.fill();ctx.strokeStyle='rgba(199,138,224,.3)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
+
+  // brilho geral
+  const gl=ctx.createRadialGradient(cx-60,b1-85,10,cx,cy,180);gl.addColorStop(0,'rgba(255,255,255,.07)');gl.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=gl;ctx.beginPath();ctx.ellipse(cx,cy,172,176,0,0,Math.PI*2);ctx.fill();
+
+  cA+=0.013;requestAnimationFrame(drawCake);
+}
+drawCake();
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('vis'),i*70)});},{threshold:.1});
+document.querySelectorAll('.rev').forEach(r=>obs.observe(r));
+
+// MASCOTE
+const frases=['Doces fresquinhos com ❤️','Transformamos açúcar em memórias!','Cada mordida conta uma história ✨','Sua festa mais doce começa aqui!','Ingredientes premium, sabor único 💜','Encomende e surpreenda! 🎂','Os melhores da região! 🏆','Feitos com carinho 💛'];
+let fi=0;const mBal=document.getElementById('mBal');
+setTimeout(()=>mBal.classList.add('show'),3200);
+setInterval(()=>{mBal.classList.remove('show');setTimeout(()=>{fi=(fi+1)%frases.length;mBal.textContent=frases[fi];mBal.classList.add('show')},400)},4500);
+
+// FORM
+function gotoForm(t){document.getElementById('fTp').value=t;document.getElementById('encomenda').scrollIntoView({behavior:'smooth'});setTimeout(()=>{const n=document.getElementById('fN');n.focus();n.style.borderColor='var(--v5)';setTimeout(()=>n.style.borderColor='',2000)},700);}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function enviar(){
+  const n=document.getElementById('fN').value.trim();const t=document.getElementById('fT').value.trim();const d=document.getElementById('fDt').value;
+  if(!n){showToast('Por favor, informe seu nome 😊');return}
+  if(!t){showToast('Informe seu WhatsApp para contato 📱');return}
+  if(!d){showToast('Qual a data do evento? 📅');return}
+  const tp=document.getElementById('fTp').value||'não especificado';const oc=document.getElementById('fOc').value||'não especificado';
+  const qt=document.getElementById('fQt').value||'não informado';const de=document.getElementById('fDe').value||'sem detalhes';
+  const df=new Date(d+'T12:00:00').toLocaleDateString('pt-BR');
+  const msg=encodeURIComponent(`Olá, Doces Mamel! 🎂\n\nVim pelo site e gostaria de fazer uma encomenda:\n\n👤 Nome: ${n}\n📱 WhatsApp: ${t}\n🍫 Tipo: ${tp}\n🎉 Ocasião: ${oc}\n📅 Data: ${df}\n👥 Quantidade: ${qt}\n\n📝 Detalhes:\n${de}\n\nAguardo retorno! 💜`);
+  window.open(`https://wa.me/5511976100068?text=${msg}`,'_blank');
+  document.getElementById('fBd').style.display='none';document.getElementById('fSuc').style.display='block';
+}
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h==='#')return;const el=document.querySelector(h);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}});});
+
+// DATE MIN
+const di=document.getElementById('fDt'),hj=new Date();hj.setDate(hj.getDate()+3);di.min=hj.toISOString().split('T')[0];
+</script>
+</body>
+</html>
